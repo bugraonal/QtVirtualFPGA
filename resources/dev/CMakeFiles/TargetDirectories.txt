@@ -1,0 +1,3 @@
+/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/rebuild_cache.dir
+/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/VirtualFPGAProject.dir
+/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/edit_cache.dir

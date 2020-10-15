@@ -1,0 +1,144 @@
+Performing C++ SOURCE FILE Test _fbracket_depth_4096 failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_0854c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_0854c.dir/build.make CMakeFiles/cmTC_0854c.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_0854c.dir/src.cxx.o
+/usr/bin/c++    -D_fbracket_depth_4096   -fbracket-depth=4096 -o CMakeFiles/cmTC_0854c.dir/src.cxx.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-fbracket-depth=4096'
+CMakeFiles/cmTC_0854c.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_0854c.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_0854c.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_0854c/fast' failed
+make: *** [cmTC_0854c/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test _fcf_protection_none failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a0174/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a0174.dir/build.make CMakeFiles/cmTC_a0174.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_a0174.dir/src.cxx.o
+/usr/bin/c++    -D_fcf_protection_none   -fcf-protection=none -o CMakeFiles/cmTC_a0174.dir/src.cxx.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-fcf-protection=none'; did you mean '-flto-partition=none'?
+CMakeFiles/cmTC_a0174.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_a0174.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_a0174.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_a0174/fast' failed
+make: *** [cmTC_a0174/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test _mno_cet failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_754af/fast"
+/usr/bin/make -f CMakeFiles/cmTC_754af.dir/build.make CMakeFiles/cmTC_754af.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_754af.dir/src.cxx.o
+/usr/bin/c++    -D_mno_cet   -mno-cet -o CMakeFiles/cmTC_754af.dir/src.cxx.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-mno-cet'; did you mean '-mno-aes'?
+CMakeFiles/cmTC_754af.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_754af.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_754af.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_754af/fast' failed
+make: *** [cmTC_754af/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test _Qunused_arguments failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_222bc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_222bc.dir/build.make CMakeFiles/cmTC_222bc.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_222bc.dir/src.cxx.o
+/usr/bin/c++    -D_Qunused_arguments   -Qunused-arguments -o CMakeFiles/cmTC_222bc.dir/src.cxx.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Qunused-arguments'; did you mean '-Wunused-parameter'?
+CMakeFiles/cmTC_222bc.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_222bc.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_222bc.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_222bc/fast' failed
+make: *** [cmTC_222bc/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test _mt failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_129de/fast"
+/usr/bin/make -f CMakeFiles/cmTC_129de.dir/build.make CMakeFiles/cmTC_129de.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_129de.dir/src.cxx.o
+/usr/bin/c++    -D_mt   -o CMakeFiles/cmTC_129de.dir/src.cxx.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_129de
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_129de.dir/link.txt --verbose=1
+/usr/bin/c++   -D_mt    CMakeFiles/cmTC_129de.dir/src.cxx.o  -o cmTC_129de -mt 
+c++: error: unrecognized command line option ‘-mt’; did you mean ‘-t’?
+CMakeFiles/cmTC_129de.dir/build.make:97: recipe for target 'cmTC_129de' failed
+make[1]: *** [cmTC_129de] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_129de/fast' failed
+make: *** [cmTC_129de/fast] Error 2
+
+Source file was:
+int main() {return 0;}
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a8efa/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a8efa.dir/build.make CMakeFiles/cmTC_a8efa.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a8efa.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_a8efa.dir/CheckSymbolExists.c.o   -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_a8efa
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a8efa.dir/link.txt --verbose=1
+/usr/bin/cc      CMakeFiles/cmTC_a8efa.dir/CheckSymbolExists.c.o  -o cmTC_a8efa 
+CMakeFiles/cmTC_a8efa.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_a8efa.dir/build.make:97: recipe for target 'cmTC_a8efa' failed
+make[1]: *** [cmTC_a8efa] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_a8efa/fast' failed
+make: *** [cmTC_a8efa/fast] Error 2
+
+File /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_122f2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_122f2.dir/build.make CMakeFiles/cmTC_122f2.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_122f2.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_122f2.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_122f2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_122f2.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_122f2.dir/CheckFunctionExists.c.o  -o cmTC_122f2 -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_122f2.dir/build.make:97: recipe for target 'cmTC_122f2' failed
+make[1]: *** [cmTC_122f2] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_122f2/fast' failed
+make: *** [cmTC_122f2/fast] Error 2
+
+

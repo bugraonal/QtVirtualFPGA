@@ -1,0 +1,1 @@
+/usr/local/bin/verilator_bin;--compiler;gcc;--prefix;Vtop_wrapper;--Mdir;/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/VirtualFPGAProject.dir/Vtop_wrapper.dir;--make;cmake;--cc;-y;.;-Os;-x-assign;0;--pins-uint8;./top_wrapper.v
