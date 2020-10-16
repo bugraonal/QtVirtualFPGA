@@ -20,7 +20,8 @@
 #include <stdint.h>
 #include <unistd.h>
 
-#include "modelthread.h"
+//#include "modelthread.h"
+#include "model.h"
 #include "indexedbutton.h"
 #include "indexedswitch.h"
 
@@ -46,6 +47,8 @@ private slots:
 
     void parseDataReceived(QString data);
 
+    void on_StopButton_clicked();
+
 signals:
     void sendDataToSend(QString data);
 
@@ -56,7 +59,8 @@ private:
     QBoxLayout *ledsLayout;
     QBoxLayout *digitsLayout;
 
-    ModelController controller;
+    //ModelController controller;
+    Model model;
     QTemporaryDir tempDir;
 
     int numButtons;

@@ -175,6 +175,7 @@ void MainWindow::on_StartButton_clicked()
         return;
     }
     ui->configFrame->setDisabled(true);
+    ui->StartButton->setDisabled(true);
 
     QDir projectFolder("/home/bugra/Ozu/Projects/VirtualFPGA/resources/projectFiles");
 
@@ -221,12 +222,24 @@ void MainWindow::on_StartButton_clicked()
 
 }
 
+void MainWindow::on_StopButton_clicked()
+{
+    ui->configFrame->setDisabled(false);
+    ui->StartButton->setDisabled(false);
+}
+
 void MainWindow::runModel() {
     // This function will start the model thread
-    connect(&controller, &ModelController::sendDataReceived, this, &MainWindow::parseDataReceived);
-    connect(this, &MainWindow::sendDataToSend, &controller, &ModelController::handleDataToSend);
-    connect(ui->StopButton, &QPushButton::clicked, &controller, &ModelController::handleStopModel);
-    emit controller.operate(tempDir.path());
+//    connect(&controller, &ModelController::sendDataReceived, this, &MainWindow::parseDataReceived);
+//    connect(this, &MainWindow::sendDataToSend, &controller, &ModelController::handleDataToSend);
+//    connect(ui->StopButton, &QPushButton::clicked, &controller, &ModelController::handleStopModel);
+//    emit controller.operate(tempDir.path());
+
+
+    connect(&model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
+    connect(this, &MainWindow::sendDataToSend, &model, &Model::setDataToSend);
+    connect(ui->StopButton, &QPushButton::clicked, &model, &Model::stopModel);
+    emit model.process(tempDir.path());
 
 }
 
@@ -318,3 +331,5 @@ int MainWindow::decodeDigit(quint8 byte) {
     }
     return num;
 }
+
+

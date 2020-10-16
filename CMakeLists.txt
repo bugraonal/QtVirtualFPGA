@@ -19,14 +19,14 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Network REQUIRED)
 add_executable(VirtualFPGA
     src/main.cpp
     src/mainwindow.cpp
-    src/modelthread.cpp
-#    src/indexedbutton.cpp
-#    src/indexedswitch.cpp
+#    src/modelthread.cpp
+    src/model.cpp
 
     include/indexedswitch.h
     include/indexedbutton.h
+    include/model.h
     include/mainwindow.h
-    include/modelthread.h
+#    include/modelthread.h
     forms/mainwindow.ui
     resources/resources.qrc
 )
