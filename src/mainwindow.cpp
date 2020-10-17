@@ -173,14 +173,6 @@ void MainWindow::on_StartButton_clicked()
     ui->configFrame->setDisabled(true);
     ui->StartButton->setDisabled(true);
 
-    // TODO: change this to a relative path (maybe use resources)
-//    QDir projectFolder("/home/bugra/Ozu/Projects/VirtualFPGA/resources/projectFiles");
-
-//    for (auto f : projectFolder.entryList()) {
-//        QFile file(projectFolder.filePath(f));
-//        file.copy(tempDir.filePath(f));
-//    }
-
     QStringList projectFiles = {    ":/projectFiles/projectFiles/CMakeLists.txt",
                                     ":/projectFiles/projectFiles/sim_main.cpp",
                                     ":/projectFiles/projectFiles/UDPClient.hpp"};

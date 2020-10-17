@@ -8,8 +8,10 @@ FileSelectDialog::FileSelectDialog(QString copyDirPath, QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+    // if a project has already been set up, show the modules
     for (auto f : copyDir.entryList()) {
-        if (f.compare(".") != 0 && f.compare("..") != 0)
+        if (f.compare(".") != 0 && f.compare("..") != 0 && f.contains(".v"))
             addTableItem(copyDir.filePath(f));
     }
 
@@ -28,6 +30,9 @@ FileSelectDialog::~FileSelectDialog()
 }
 
 void FileSelectDialog::addTableItem(QString path) {
+    // sub function for inserting a row element to the
+    // table
+
     QTableWidget *table = ui->modulesTable;
     int row = table->rowCount() - 1;
     table->insertRow(1);
@@ -38,6 +43,7 @@ void FileSelectDialog::addTableItem(QString path) {
 }
 
 void FileSelectDialog::addModules() {
+    // add existing module
     auto fileDiag = new QFileDialog;
     fileDiag->setNameFilter("Verilog (*.v *.sv)");
     fileDiag->setFileMode(QFileDialog::ExistingFiles);
@@ -51,6 +57,8 @@ void FileSelectDialog::addModules() {
 }
 
 void FileSelectDialog::removeModules() {
+    // remove added modules
+
     QTableWidget *table = ui->modulesTable;
     QList<QTableWidgetItem *> range = table->selectedItems();
     int row;
@@ -65,6 +73,12 @@ void FileSelectDialog::removeModules() {
 }
 
 void FileSelectDialog::openModules() {
+    // open any of the added modules with system defualt text
+    // editor
+
+    // TODO: When multiple files are opened, the first(?) one
+    // is opened multiple times, instead of the other ones
+
     QTableWidget *table = ui->modulesTable;
     QList<QTableWidgetItem *> range = table->selectedItems();
     int row;
@@ -78,6 +92,13 @@ void FileSelectDialog::openModules() {
 }
 
 void FileSelectDialog::browseTopWrapper() {
+    // Open a file dialog and browse for top_wrapper
+
+    // Remove the old wrapper
+    if (QDir(copyDir.path()).entryList().contains("top_wrapper.v")) {
+        QFile (copyDir.filePath("top_wrapper.v")).remove();
+    }
+
     auto fileDiag = new QFileDialog;
     fileDiag->setNameFilter("Verilog (*.v *.sv)");
     fileDiag->setFileMode(QFileDialog::ExistingFile);
@@ -89,7 +110,13 @@ void FileSelectDialog::browseTopWrapper() {
 }
 
 void FileSelectDialog::createTopWrapper() {
-    // TODO: create top_wrapper template resource
+    // Create a new wrapper. The template wrapper will be copied to
+    // the project directory and will be opened for editing
+
+    // Remove the old wrapper
+    if (QDir(copyDir.path()).entryList().contains("top_wrapper.v")) {
+        QFile (copyDir.filePath("top_wrapper.v")).remove();
+    }
     QFile templ(":/projectFiles/projectFiles/top_wrapper_template.v");
     templ.copy(copyDir.filePath("top_wrapper.v"));
     QDesktopServices::openUrl(copyDir.filePath("top_wrapper.v"));
