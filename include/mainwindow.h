@@ -20,10 +20,10 @@
 #include <stdint.h>
 #include <unistd.h>
 
-//#include "modelthread.h"
 #include "model.h"
 #include "indexedbutton.h"
 #include "indexedswitch.h"
+#include "fileselectdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -59,22 +59,20 @@ private:
     QBoxLayout *ledsLayout;
     QBoxLayout *digitsLayout;
 
-    //ModelController controller;
-    Model model;
+    Model *model;
     QTemporaryDir tempDir;
 
     int numButtons;
     int numSwitches;
     int numLeds;
     int numDigits;
-    QString inputFileName;
-    bool modelRunning = 0;
+    QStringList inputFileNames;
+    bool firstModel = 1;
     QString dataToSend = "0 0";
 
     void configureGroups();
     void runModel();
     QString createDataToSend();
-    //void parseDataReceived(QByteArray &data);
 
     template<bool isBtn>
     void dataChanged(int k);

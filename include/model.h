@@ -16,6 +16,7 @@ class Model : public QObject
 
 public:
     Model();
+    ~Model();
 
 private:
     bool modelRunning = 0;

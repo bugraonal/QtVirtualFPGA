@@ -153,13 +153,9 @@ void MainWindow::on_applyConfigButton_clicked() { configureGroups(); }
 
 void MainWindow::openFile()
 {
-    // TODO: The user will need to select the Verilog files and the
-    // top wrapper. Currently they can select only 1 file.
-    // Consider selecting multiple files or auto generating top wrapper
-    QFileDialog dialog(this);
-    dialog.setFileMode(QFileDialog::ExistingFile);
-    if (dialog.exec()) {
-        inputFileName = dialog.selectedFiles()[0];
+    FileSelectDialog diag(tempDir.path());
+    if (!diag.exec()) {
+        std::cerr << "File select dialog error" << std::endl;
     }
 }
 
@@ -170,26 +166,36 @@ void MainWindow::on_StartButton_clicked()
     // It will start the CMake and then Make proceses as
     // QProcesses. Their error messages are forwareded to the
     // console
-    if (inputFileName.isEmpty()) {
-        //TODO: add "Select file" error dialog
+    if (QDir(tempDir.path()).entryList().isEmpty()) {
+        std::cerr << "No files added" << std::endl;
         return;
     }
     ui->configFrame->setDisabled(true);
     ui->StartButton->setDisabled(true);
 
-    QDir projectFolder("/home/bugra/Ozu/Projects/VirtualFPGA/resources/projectFiles");
+    // TODO: change this to a relative path (maybe use resources)
+//    QDir projectFolder("/home/bugra/Ozu/Projects/VirtualFPGA/resources/projectFiles");
 
-    for (auto f : projectFolder.entryList()) {
-        QFile file(projectFolder.filePath(f));
-        file.copy(tempDir.filePath(f));
+//    for (auto f : projectFolder.entryList()) {
+//        QFile file(projectFolder.filePath(f));
+//        file.copy(tempDir.filePath(f));
+//    }
+
+    QStringList projectFiles = {    ":/projectFiles/projectFiles/CMakeLists.txt",
+                                    ":/projectFiles/projectFiles/sim_main.cpp",
+                                    ":/projectFiles/projectFiles/UDPClient.hpp"};
+    for (auto f : projectFiles) {
+        QFile file(f);
+        file.copy(tempDir.filePath(f.section("/", -1, -1)));
     }
-    QFile in(inputFileName);
-    in.copy(tempDir.filePath(inputFileName.section("/", -1, -1)));
 
+    for (auto f : inputFileNames) {
+        QFile in(f);
+        in.copy(tempDir.filePath(f.section("/", -1, -1)));
+    }
     QString command = "cmake";
     QStringList args;
     args << ".";
-//    args << tempDir.filePath("CMakeLists.txt");
     QProcess cmake;
     cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     cmake.setWorkingDirectory(tempDir.path());
@@ -226,6 +232,8 @@ void MainWindow::on_StopButton_clicked()
 {
     ui->configFrame->setDisabled(false);
     ui->StartButton->setDisabled(false);
+    delete model;
+    model = nullptr;
 }
 
 void MainWindow::runModel() {
@@ -235,11 +243,11 @@ void MainWindow::runModel() {
 //    connect(ui->StopButton, &QPushButton::clicked, &controller, &ModelController::handleStopModel);
 //    emit controller.operate(tempDir.path());
 
-
-    connect(&model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
-    connect(this, &MainWindow::sendDataToSend, &model, &Model::setDataToSend);
-    connect(ui->StopButton, &QPushButton::clicked, &model, &Model::stopModel);
-    emit model.process(tempDir.path());
+    model = new Model();
+    connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
+    connect(this, &MainWindow::sendDataToSend, model, &Model::setDataToSend);
+    //connect(ui->StopButton, &QPushButton::clicked, model, &Model::stopModel);
+    emit model->process(tempDir.path());
 
 }
 

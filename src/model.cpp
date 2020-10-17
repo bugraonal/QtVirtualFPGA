@@ -5,6 +5,16 @@ Model::Model()
 
 }
 
+Model::~Model() {
+    if (model.state() == QProcess::Running) {
+        model.terminate();
+        model.close();
+    }
+    socket->close();
+    delete socket;
+    socket = nullptr;
+}
+
 void Model::recvData() {
     // This slot will be triggered when a UDP datagram is received
     // A response will be sent and the data received will be sent (with a signal)
@@ -61,7 +71,9 @@ void Model::initSocket() {
 void Model::stopModel() {
     if (model.state() == QProcess::Running) {
         model.terminate();
+        model.close();
     }
+    socket->close();
 }
 
 void Model::setDataToSend(QString data) { this->dataSent = data; }

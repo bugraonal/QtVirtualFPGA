@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.1, 2020-10-08T18:04:11. -->
+<!-- Written by QtCreator 4.13.2, 2020-10-17T16:02:49. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -350,7 +350,9 @@
     </valuelist>
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
-    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+    <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes">
+     <value type="QString">TERMCMD=kitty</value>
+    </valuelist>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">VirtualFPGA</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.VirtualFPGA</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">VirtualFPGA</value>

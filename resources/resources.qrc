@@ -6,7 +6,7 @@
     <qresource prefix="/projectFiles">
         <file>projectFiles/CMakeLists.txt</file>
         <file>projectFiles/sim_main.cpp</file>
-        <file>projectFiles/top_wrapper.v</file>
         <file>projectFiles/UDPClient.hpp</file>
+        <file>projectFiles/top_wrapper_template.v</file>
     </qresource>
 </RCC>
