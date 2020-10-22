@@ -142,3 +142,48 @@ Makefile:126: recipe for target 'cmTC_122f2/fast' failed
 make: *** [cmTC_122f2/fast] Error 2
 
 
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_696f8/fast && /usr/bin/make  -f CMakeFiles/cmTC_696f8.dir/build.make CMakeFiles/cmTC_696f8.dir/build
+make[1]: Entering directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_696f8.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD -o CMakeFiles/cmTC_696f8.dir/src.c.o -c /home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_696f8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_696f8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD CMakeFiles/cmTC_696f8.dir/src.c.o -o cmTC_696f8 
+CMakeFiles/cmTC_696f8.dir/src.c.o: In function `main':
+src.c:(.text+0x3e): undefined reference to `pthread_create'
+src.c:(.text+0x4a): undefined reference to `pthread_detach'
+src.c:(.text+0x56): undefined reference to `pthread_cancel'
+src.c:(.text+0x67): undefined reference to `pthread_join'
+src.c:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_696f8.dir/build.make:105: recipe for target 'cmTC_696f8' failed
+make[1]: *** [cmTC_696f8] Error 1
+make[1]: Leaving directory '/home/bugra/Ozu/Projects/VirtualFPGA/resources/dev/CMakeFiles/CMakeTmp'
+Makefile:140: recipe for target 'cmTC_696f8/fast' failed
+make: *** [cmTC_696f8/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+

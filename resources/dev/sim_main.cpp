@@ -48,7 +48,7 @@ int main(int argc, char ** argv) {
     // Initialize inputs
     top->clk = 0;
     top->rst = 0;
-    
+    std::cout << "IT: " << IT_PER_CYCLE << " DLY: " << SIM_DELAY << std::endl;  
     // Wait for UI to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
  // Simulation steps
@@ -57,7 +57,7 @@ int main(int argc, char ** argv) {
         main_time++;
     
         // Toggle clk
-        if ((main_time % 5) == 1) {
+        if ((main_time % IT_PER_CYCLE/2) == 1) {
             top->clk = !top->clk;
         }
 
@@ -82,7 +82,7 @@ int main(int argc, char ** argv) {
         }
 
         top->eval();
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        std::this_thread::sleep_for(std::chrono::milliseconds(SIM_DELAY));
     }
 
     top->final();

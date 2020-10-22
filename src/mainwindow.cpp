@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     configureGroups();
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
+    connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
 }
 
 MainWindow::~MainWindow()
@@ -148,6 +149,13 @@ void MainWindow::dataChanged(int k){
 
 }
 
+void MainWindow::openSettingsWindow() {
+    SettingsDialog diag;
+    if (diag.exec()) {
+        simDelay = diag.getSimDelay();
+        itPerCycle = diag.getItPerCycle();
+    }
+}
 
 void MainWindow::on_applyConfigButton_clicked() { configureGroups(); }
 
@@ -187,7 +195,7 @@ void MainWindow::on_StartButton_clicked()
     }
     QString command = "cmake";
     QStringList args;
-    args << ".";
+    args << "-DSIM_DLY=" + simDelay << "-DIT=" + itPerCycle << ".";
     QProcess cmake;
     cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     cmake.setWorkingDirectory(tempDir.path());
@@ -229,11 +237,7 @@ void MainWindow::on_StopButton_clicked()
 }
 
 void MainWindow::runModel() {
-    // This function will start the model thread
-//    connect(&controller, &ModelController::sendDataReceived, this, &MainWindow::parseDataReceived);
-//    connect(this, &MainWindow::sendDataToSend, &controller, &ModelController::handleDataToSend);
-//    connect(ui->StopButton, &QPushButton::clicked, &controller, &ModelController::handleStopModel);
-//    emit controller.operate(tempDir.path());
+    // This function will start the model
 
     model = new Model();
     connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);

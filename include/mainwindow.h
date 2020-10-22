@@ -24,6 +24,7 @@
 #include "indexedbutton.h"
 #include "indexedswitch.h"
 #include "fileselectdialog.h"
+#include "settingsdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,6 +50,8 @@ private slots:
 
     void on_StopButton_clicked();
 
+    void openSettingsWindow();
+
 signals:
     void sendDataToSend(QString data);
 
@@ -69,6 +72,8 @@ private:
     QStringList inputFileNames;
     bool firstModel = 1;
     QString dataToSend = "0 0";
+    QString simDelay = "1";
+    QString itPerCycle = "10";
 
     void configureGroups();
     void runModel();

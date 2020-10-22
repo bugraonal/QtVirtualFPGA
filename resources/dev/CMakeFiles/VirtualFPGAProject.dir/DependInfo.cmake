@@ -14,6 +14,8 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
+  "IT_PER_CYCLE=4"
+  "SIM_DELAY=2"
   "VM_COVERAGE=0"
   "VM_SC=0"
   "VM_TRACE=0"

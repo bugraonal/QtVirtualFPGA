@@ -24,6 +24,10 @@ add_executable(VirtualFPGAProject
 
 target_link_libraries(VirtualFPGAProject PUBLIC Boost::boost Boost::system Boost::thread)
 
+option(SIM_DLY "Simulation Delay in ms" 1)
+option(IT "Iteration per cycle" 10)
+add_compile_definitions(SIM_DELAY=${SIM_DLY} IT_PER_CYCLE=${IT})
+
 # Add the Verilated circuit to the target
 verilate(VirtualFPGAProject 
   INCLUDE_DIRS "."

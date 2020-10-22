@@ -21,15 +21,18 @@ add_executable(VirtualFPGA
     src/mainwindow.cpp
     src/model.cpp
     src/fileselectdialog.cpp
+    src/settingsdialog.cpp
 
     include/fileselectdialog.h
     include/indexedswitch.h
     include/indexedbutton.h
     include/model.h
     include/mainwindow.h
+    include/settingsdialog.h
 
     forms/fileselectdialog.ui
     forms/mainwindow.ui
+    forms/settingsdialog.ui
 
     resources/resources.qrc
 )
