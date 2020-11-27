@@ -200,22 +200,22 @@ void MainWindow::on_StartButton_clicked()
     cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     cmake.setWorkingDirectory(tempDir.path());
     cmake.start(command, args);
-    while(cmake.state() == QProcess::Running);
+    //while(cmake.state() == QProcess::Running);
     cmake.waitForFinished();
     if (cmake.exitStatus() != QProcess::NormalExit || cmake.exitCode() != 0) {
         std::cerr << "CMake error" << std::endl;
         return;
     }
     //cmake.close();
-    command = "make";
+    command = "cmake";
     args.clear();
+    args << "--build" << ".";
     QProcess make;
-
 
     make.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     make.setWorkingDirectory(tempDir.path());
     make.start(command, args);
-    while(make.state() == QProcess::Running);
+    //while(make.state() == QProcess::Running);
     make.waitForFinished();
     if (make.exitStatus() != QProcess::NormalExit || make.exitCode() != 0) {
         std::cerr << "Make error" << std::endl;
