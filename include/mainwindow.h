@@ -13,6 +13,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QTextStream>
+#include <QMouseEvent>
 
 #include <array>
 #include <string>
@@ -44,16 +45,21 @@ private slots:
 
     void openFile();
 
-    void on_StartButton_clicked();
+    void compileAndRunModel();
 
     void parseDataReceived(QString data);
 
-    void on_StopButton_clicked();
+    void stopModel();
 
     void openSettingsWindow();
 
 signals:
     void sendDataToSend(QString data);
+
+protected:
+    void mouseMoveEvent(QMouseEvent *e);
+    void mousePressEvent(QMouseEvent *e);
+    void mouseReleaseEvent(QMouseEvent *e);
 
 private:
     Ui::MainWindow *ui;
@@ -76,7 +82,6 @@ private:
     QString itPerCycle = "10";
 
     void configureGroups();
-    void runModel();
     QString createDataToSend();
 
     template<bool isBtn>

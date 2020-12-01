@@ -21,10 +21,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->digitGroup->setLayout(digitsLayout);
 
 
+    model = nullptr;
+    this->setMouseTracking(true);
+
     configureGroups();
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
+    connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
+    connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
 }
 
 MainWindow::~MainWindow()
@@ -149,6 +154,12 @@ void MainWindow::dataChanged(int k){
 
 }
 
+void MainWindow::mousePressEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+
 void MainWindow::openSettingsWindow() {
     SettingsDialog diag;
     if (diag.exec()) {
@@ -167,85 +178,37 @@ void MainWindow::openFile()
     }
 }
 
-void MainWindow::on_StartButton_clicked()
+void MainWindow::compileAndRunModel()
 {
     // This slot will copy the files in the project folder
     // to a temporary folder.
     // It will start the CMake and then Make proceses as
     // QProcesses. Their error messages are forwareded to the
     // console
-    if (QDir(tempDir.path()).entryList().isEmpty()) {
-        std::cerr << "No files added" << std::endl;
-        return;
-    }
+
     ui->configFrame->setDisabled(true);
     ui->StartButton->setDisabled(true);
-
-    QStringList projectFiles = {    ":/projectFiles/projectFiles/CMakeLists.txt",
-                                    ":/projectFiles/projectFiles/sim_main.cpp",
-                                    ":/projectFiles/projectFiles/UDPClient.hpp"};
-    for (auto f : projectFiles) {
-        QFile file(f);
-        file.copy(tempDir.filePath(f.section("/", -1, -1)));
+    if (model != nullptr) {
+        delete model;
     }
-
-    for (auto f : inputFileNames) {
-        QFile in(f);
-        in.copy(tempDir.filePath(f.section("/", -1, -1)));
-    }
-    QString command = "cmake";
-    QStringList args;
-    args << "-DSIM_DLY=" + simDelay << "-DIT=" + itPerCycle << ".";
-    QProcess cmake;
-    cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
-    cmake.setWorkingDirectory(tempDir.path());
-    cmake.start(command, args);
-    //while(cmake.state() == QProcess::Running);
-    cmake.waitForFinished();
-    if (cmake.exitStatus() != QProcess::NormalExit || cmake.exitCode() != 0) {
-        std::cerr << "CMake error" << std::endl;
-        return;
-    }
-    //cmake.close();
-    command = "cmake";
-    args.clear();
-    args << "--build" << ".";
-    QProcess make;
-
-    make.setProcessChannelMode(QProcess::ForwardedErrorChannel);
-    make.setWorkingDirectory(tempDir.path());
-    make.start(command, args);
-    //while(make.state() == QProcess::Running);
-    make.waitForFinished();
-    if (make.exitStatus() != QProcess::NormalExit || make.exitCode() != 0) {
-        std::cerr << "Make error" << std::endl;
-        return;
-    }
-    //make.terminate();
-    runModel();
-    cmake.close();
-    make.close();
+    model = new Model(tempDir.path());
+    connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
+    connect(this, &MainWindow::sendDataToSend, model, &Model::setDataToSend);
+    emit model->compile(inputFileNames, simDelay, itPerCycle);
+    emit model->runModel();
 
 }
 
-void MainWindow::on_StopButton_clicked()
+void MainWindow::stopModel()
 {
     ui->configFrame->setDisabled(false);
     ui->StartButton->setDisabled(false);
-    delete model;
-    model = nullptr;
+    if (model != nullptr) {
+        delete model;
+        model = nullptr;
+    }
 }
 
-void MainWindow::runModel() {
-    // This function will start the model
-
-    model = new Model();
-    connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
-    connect(this, &MainWindow::sendDataToSend, model, &Model::setDataToSend);
-    //connect(ui->StopButton, &QPushButton::clicked, model, &Model::stopModel);
-    emit model->process(tempDir.path());
-
-}
 
 void MainWindow::parseDataReceived(QString data) {
     // Data that came from the model thread will be parsed and be displayed on

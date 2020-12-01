@@ -15,7 +15,7 @@ class Model : public QObject
     Q_OBJECT
 
 public:
-    Model();
+    Model(QString tmpDir);
     ~Model();
 
 private:
@@ -23,6 +23,7 @@ private:
     QString dataSent = "0 0";
     QUdpSocket *socket;
     QProcess model;
+    QString tmpDir;
 
     void initSocket();
 
@@ -35,7 +36,8 @@ signals:
 public slots:
     void stopModel();
     void setDataToSend(QString data);
-    void process(QString tmpDir);
+    void compile(QStringList inputFileNames, QString simDelay, QString itPerCycle);
+    void runModel();
 
 };
 
