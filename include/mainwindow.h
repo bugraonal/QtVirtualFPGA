@@ -71,6 +71,8 @@ private:
     Model *model;
     QTemporaryDir tempDir;
 
+    enum dataID { BUTTON = 0, SWITCH = 1, MOUSEMOVE = 2, MOUSEPRESS = 3, MOUSERELEASE = 4 };
+    enum mouseButton {LEFT = 1, RIGHT = 2, MIDDLE = 3 };
     int numButtons;
     int numSwitches;
     int numLeds;
@@ -84,7 +86,7 @@ private:
     void configureGroups();
     QString createDataToSend();
 
-    template<bool isBtn>
+    template<int id>
     void dataChanged(int k);
 
     int decodeDigit(quint8 byte);

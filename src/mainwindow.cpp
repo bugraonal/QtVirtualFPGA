@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     model = nullptr;
-    this->setMouseTracking(true);
 
     configureGroups();
 
@@ -30,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
     connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
     connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
+
 }
 
 MainWindow::~MainWindow()
@@ -117,7 +117,7 @@ void MainWindow::configureGroups() {
     numDigits = newDigits;
 }
 
-template<bool isBtn>
+template<int id>
 void MainWindow::dataChanged(int k){
     // This slot is triggered when a button is pressed
     // or a switch is toggled
@@ -129,7 +129,7 @@ void MainWindow::dataChanged(int k){
 
     stream >> buttonData >> switchData;
 
-    if constexpr (isBtn) {
+    if constexpr (id == dataID::BUTTON) {
         //buttonData += (1 << k);
         // negate bit
         int bit = buttonData & (1 << k);
@@ -138,7 +138,7 @@ void MainWindow::dataChanged(int k){
         else
             buttonData |= (1 << k);
     }
-    else {
+    else if (id == dataID::SWITCH) {
         // negate bit
         int bit = switchData & (1 << k);
         if (bit)
@@ -146,6 +146,9 @@ void MainWindow::dataChanged(int k){
         else
             switchData |= (1 << k);
     }
+    else if (id == dataID::MOUSEMOVE) {}
+    else if (id == dataID::MOUSEPRESS) {}
+    else if (id == dataID::MOUSERELEASE) {}
     dataToSend.clear();
     stream << buttonData << " " << switchData;
 
@@ -158,7 +161,7 @@ void MainWindow::mousePressEvent(QMouseEvent *e) {/*std::cout << e->globalY() <<
 
 void MainWindow::mouseReleaseEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
 
-void MainWindow::mouseMoveEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+void MainWindow::mouseMoveEvent(QMouseEvent *e) {std::cout << e->globalY() << ", " << e->globalY() << std::endl;}
 
 void MainWindow::openSettingsWindow() {
     SettingsDialog diag;

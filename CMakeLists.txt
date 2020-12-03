@@ -22,6 +22,10 @@ add_executable(VirtualFPGA
     src/model.cpp
     src/fileselectdialog.cpp
     src/settingsdialog.cpp
+    src/customcentralwidget.cpp
+    src/wslprocess.cpp
+    src/linuxprocess.cpp
+    src/windowsprocess.cpp
 
     include/fileselectdialog.h
     include/indexedswitch.h
@@ -29,6 +33,11 @@ add_executable(VirtualFPGA
     include/model.h
     include/mainwindow.h
     include/settingsdialog.h
+    include/customcentralwidget.h
+    include/abstractprocess.h
+    include/windowsprocess.h
+    include/wslprocess.h
+    include/linuxprocess.h
 
     forms/fileselectdialog.ui
     forms/mainwindow.ui
