@@ -9,6 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
     , numLeds(0)
     , numDigits(0)
 {
+#ifdef _WIN32
+    process = WSLProcess();
+#elif __linux__
+    process = LinuxProcess();
+#endif
     ui->setupUi(this);
     buttonsLayout = new QBoxLayout(QBoxLayout::RightToLeft);
     switchesLayout = new QBoxLayout(QBoxLayout::RightToLeft);
@@ -28,9 +33,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
     connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
     connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
-    connect(ui->centralwidget, &CustomCentralWidget::mouseMoved, this, &MainWindow::dataChanged<dataID::MOUSEMOVE>);
-    connect(ui->centralwidget, &CustomCentralWidget::mousePressed, this, &MainWindow::dataChanged<dataID::MOUSEPRESS>);
-    connect(ui->centralwidget, &CustomCentralWidget::mouseReleased, this, &MainWindow::dataChanged<dataID::MOUSERELEASE>);
+//    connect(ui->centralwidget, &CustomCentralWidget::mouseMoved, this, &MainWindow::dataChanged<dataID::MOUSEMOVE>);
+//    connect(ui->centralwidget, &CustomCentralWidget::mousePressed, this, &MainWindow::dataChanged<dataID::MOUSEPRESS>);
+//    connect(ui->centralwidget, &CustomCentralWidget::mouseReleased, this, &MainWindow::dataChanged<dataID::MOUSERELEASE>);
 
 }
 
@@ -190,9 +195,10 @@ void MainWindow::compileAndRunModel()
     if (model != nullptr) {
         delete model;
     }
-    model = new Model(tempDir.path());
+    model = new Model(tempDir.path(),process);
     connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
     connect(this, &MainWindow::sendDataToSend, model, &Model::setDataToSend);
+    model->initSocket();
     emit model->compile(inputFileNames, simDelay, itPerCycle);
     emit model->runModel();
 

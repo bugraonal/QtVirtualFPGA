@@ -8,12 +8,12 @@
 class AbstractProcess {
 
 public:
-    AbstractProcess();
+    AbstractProcess(){};
 
-    virtual QString makeTmpDir();
-    virtual void runProcess();
-    virtual void compileProcess(QStringList inputFileNames, QString simDelay, QString itPerCycle);
-    virtual void topModel();
+    virtual QString makeTmpDir(){};
+    virtual void runProcess(){};
+    virtual void compileProcess(QStringList inputFileNames, QString simDelay, QString itPerCycle){};
+    virtual void topModel(){};
 
 private:
     QProcess process;
