@@ -6,11 +6,11 @@
 class LinuxProcess : public AbstractProcess {
 
 public:
-    LinuxProcess();
-    virtual QString makeTmpDir();
-    virtual void runProcess();
-    virtual void compileProcess(QStringList inputFileNames, QString simDelay, QString itPerCycle);
-    virtual void topModel();
+     LinuxProcess(){};
+     QString makeTmpDir(){};
+     void runProcess(){};
+     void compileProcess(QStringList inputFileNames, QString simDelay, QString itPerCycle){};
+     void topModel(){};
 
 
 };

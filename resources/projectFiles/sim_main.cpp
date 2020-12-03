@@ -2,7 +2,7 @@
 #include "Vtop_wrapper.h"
 #include <iostream>
 #include <memory>
-#include <unistd.h>
+#include <io.h>
 #include <stdio.h>
 #include <sstream>
 #include <ostream>

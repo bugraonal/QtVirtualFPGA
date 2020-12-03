@@ -19,7 +19,7 @@
 #include <string>
 #include <iostream>
 #include <stdint.h>
-#include <unistd.h>
+#include <io.h>
 
 #include "model.h"
 #include "indexedbutton.h"
@@ -58,9 +58,7 @@ signals:
     void sendDataToSend(QString data);
 
 protected:
-    void mouseMoveEvent(QMouseEvent *e);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
+
 
 private:
     Ui::MainWindow *ui;

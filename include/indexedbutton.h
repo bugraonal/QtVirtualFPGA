@@ -18,10 +18,10 @@ public:
 ;
 
 signals:
-    void indexClicked(int index);
+    void indexClicked(int index,int unused);
 
 private slots:
-    void handleClick() {emit indexClicked(index);};
+    void handleClick() {emit indexClicked(index,0);};
 
 private:
     int index;

@@ -1,10 +1,11 @@
 #include "fileselectdialog.h"
 #include "ui_fileselectdialog.h"
 
-FileSelectDialog::FileSelectDialog(QString copyDirPath, QWidget *parent) :
+FileSelectDialog::FileSelectDialog(QString copyDirPath, QWidget *parent,AbstractProcess process;) :
     QDialog(parent),
     ui(new Ui::FileSelectDialog),
-    copyDir(copyDirPath)
+    copyDir(copyDirPath),
+    process(process)
 {
     ui->setupUi(this);
 
