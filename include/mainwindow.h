@@ -26,6 +26,7 @@
 #include "indexedswitch.h"
 #include "fileselectdialog.h"
 #include "settingsdialog.h"
+#include "customcentralwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -87,7 +88,7 @@ private:
     QString createDataToSend();
 
     template<int id>
-    void dataChanged(int k);
+    void dataChanged(int k, int n=0);
 
     int decodeDigit(quint8 byte);
 

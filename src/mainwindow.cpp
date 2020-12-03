@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ledGroup->setLayout(ledsLayout);
     ui->digitGroup->setLayout(digitsLayout);
 
-
     model = nullptr;
 
     configureGroups();
@@ -29,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
     connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
     connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
+    connect(ui->centralwidget, &CustomCentralWidget::mouseMoved, this, &MainWindow::dataChanged<dataID::MOUSEMOVE>);
+    connect(ui->centralwidget, &CustomCentralWidget::mousePressed, this, &MainWindow::dataChanged<dataID::MOUSEPRESS>);
+    connect(ui->centralwidget, &CustomCentralWidget::mouseReleased, this, &MainWindow::dataChanged<dataID::MOUSERELEASE>);
 
 }
 
@@ -49,7 +51,7 @@ void MainWindow::configureGroups() {
         for (int i = numButtons; i < newButtons; ++i) {
             IndexedButton* b = new IndexedButton(i);
             buttonsLayout->addWidget(b);
-            connect(b, &IndexedButton::indexClicked, this, &MainWindow::dataChanged<1>);
+            connect(b, &IndexedButton::indexClicked, this, &MainWindow::dataChanged<dataID::BUTTON>);
         }
     }
     else {
@@ -64,7 +66,7 @@ void MainWindow::configureGroups() {
         for (int i = numSwitches; i < newSwitches; ++i) {
             IndexedSwitch *s = new IndexedSwitch(i);
             switchesLayout->addWidget(s);
-            connect(s, &IndexedSwitch::indexClicked, this, &MainWindow::dataChanged<0>);
+            connect(s, &IndexedSwitch::indexClicked, this, &MainWindow::dataChanged<dataID::SWITCH>);
         }
         numSwitches = newSwitches;
 
@@ -118,7 +120,7 @@ void MainWindow::configureGroups() {
 }
 
 template<int id>
-void MainWindow::dataChanged(int k){
+void MainWindow::dataChanged(int k, int n){
     // This slot is triggered when a button is pressed
     // or a switch is toggled
     // The button an switch values are calculated and
@@ -156,12 +158,6 @@ void MainWindow::dataChanged(int k){
     emit sendDataToSend(dataToSend);
 
 }
-
-void MainWindow::mousePressEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
-
-void MainWindow::mouseReleaseEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
-
-void MainWindow::mouseMoveEvent(QMouseEvent *e) {std::cout << e->globalY() << ", " << e->globalY() << std::endl;}
 
 void MainWindow::openSettingsWindow() {
     SettingsDialog diag;
