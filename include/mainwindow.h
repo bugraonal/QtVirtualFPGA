@@ -56,10 +56,10 @@ private slots:
 signals:
     void sendDataToSend(QString data);
 
-protected:
-    void mouseMoveEvent(QMouseEvent *e);
-    void mousePressEvent(QMouseEvent *e);
-    void mouseReleaseEvent(QMouseEvent *e);
+//protected:
+//    void mouseMoveEvent(QMouseEvent *e);
+//    void mousePressEvent(QMouseEvent *e);
+//    void mouseReleaseEvent(QMouseEvent *e);
 
 private:
     Ui::MainWindow *ui;

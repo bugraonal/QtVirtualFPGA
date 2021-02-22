@@ -154,11 +154,11 @@ void MainWindow::dataChanged(int k){
 
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+//void MainWindow::mousePressEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
 
-void MainWindow::mouseReleaseEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+//void MainWindow::mouseReleaseEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
 
-void MainWindow::mouseMoveEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
+//void MainWindow::mouseMoveEvent(QMouseEvent *e) {/*std::cout << e->globalY() << ", " << e->globalY() << std::endl;*/}
 
 void MainWindow::openSettingsWindow() {
     SettingsDialog diag;
@@ -243,6 +243,7 @@ void MainWindow::parseDataReceived(QString data) {
 int MainWindow::decodeDigit(quint8 byte) {
     // 7-seg digit decoder
     int num;
+    byte = byte | 0x80;
     switch (byte) {
     case 0xC0:
         num = 0;
