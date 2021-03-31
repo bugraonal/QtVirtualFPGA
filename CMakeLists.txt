@@ -29,6 +29,8 @@ add_executable(VirtualFPGA
     include/model.h
     include/mainwindow.h
     include/settingsdialog.h
+    include/versionmessage.h
+    include/version.h
 
     forms/fileselectdialog.ui
     forms/mainwindow.ui

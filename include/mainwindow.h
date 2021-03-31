@@ -26,6 +26,7 @@
 #include "indexedswitch.h"
 #include "fileselectdialog.h"
 #include "settingsdialog.h"
+#include "versionmessage.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

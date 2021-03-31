@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSettings, &QAction::triggered, this, &MainWindow::openSettingsWindow);
     connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
     connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
+    connect(ui->actionVersion, &QAction::triggered, [](){(new VersionMessage())->exec();});
 }
 
 MainWindow::~MainWindow()
@@ -290,7 +291,7 @@ int MainWindow::decodeDigit(quint8 byte) {
      case 0x86:
         num = 14;
         break;
-     case 0x8D:
+     case 0x8E:
         num = 15;
         break;
      default:

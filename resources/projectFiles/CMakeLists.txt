@@ -31,5 +31,5 @@ add_compile_definitions(SIM_DELAY=${SIM_DLY} IT_PER_CYCLE=${IT})
 # Add the Verilated circuit to the target
 verilate(VirtualFPGAProject 
   INCLUDE_DIRS "."
-  VERILATOR_ARGS -Os -x-assign 0 --pins-uint8
+  VERILATOR_ARGS -Os -x-assign 0 --pins-uint8 -Wno-WIDTH
   SOURCES ./top_wrapper.v)

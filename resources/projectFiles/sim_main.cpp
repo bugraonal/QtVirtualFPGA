@@ -78,7 +78,10 @@ int main(int argc, char ** argv) {
             auto recv_data = client->recv();
             std::cout << "Model: Message " << recv_data << " received" << std::endl;
             ss.str(recv_data);
-            ss >> top->btn >> top->sw;
+            std::string btn_string, sw_string;
+            ss >> btn_string >> sw_string;
+            top->btn = stoi(btn_string);
+            top->sw = stoi(sw_string);
         }
 
         top->eval();
