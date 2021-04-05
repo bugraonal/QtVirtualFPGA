@@ -14,7 +14,7 @@ public:
     {
         connect(this, &QCheckBox::clicked, this, &IndexedSwitch::handleClick);
         setStyleSheet("QCheckBox::indicator {"
-                      "    width: 20px;"
+                      "    width: 30px;"
                       "    height: 60px;"
                       "}"
                      "QCheckBox::indicator:checked {image: url(:/images/images/switch_on.png);}"

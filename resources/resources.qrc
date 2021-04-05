@@ -2,6 +2,8 @@
     <qresource prefix="/images">
         <file>images/switch_on.png</file>
         <file>images/switch_off.png</file>
+        <file>images/button_pressed.png</file>
+        <file>images/button_unpressed.png</file>
     </qresource>
     <qresource prefix="/projectFiles">
         <file>projectFiles/CMakeLists.txt</file>
