@@ -57,12 +57,16 @@ void Model::compile(QStringList inputFileNames, QString simDelay, QString itPerC
         QFile in(f);
         in.copy(tempDir.filePath(f.section("/", -1, -1)));
     }
+    QDir buildDir(tempDir.path() + "/build");
+    if (buildDir.exists())
+        buildDir.removeRecursively();
+    tempDir.mkdir("build");
     QString command = "cmake";
     QStringList args;
-    args << "-DSIM_DLY=" + simDelay << "-DIT=" + itPerCycle << ".";
+    args << "-DSIM_DLY=" + simDelay << "-DIT=" + itPerCycle << "..";
     QProcess cmake;
     cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
-    cmake.setWorkingDirectory(tempDir.path());
+    cmake.setWorkingDirectory(tempDir.path() + "/build");
     cmake.start(command, args);
     //while(cmake.state() == QProcess::Running);
     cmake.waitForFinished();
@@ -77,7 +81,7 @@ void Model::compile(QStringList inputFileNames, QString simDelay, QString itPerC
     QProcess make;
 
     make.setProcessChannelMode(QProcess::ForwardedErrorChannel);
-    make.setWorkingDirectory(tempDir.path());
+    make.setWorkingDirectory(tempDir.path() + "/build");
     make.start(command, args);
     //while(make.state() == QProcess::Running);
     make.waitForFinished();
@@ -98,9 +102,9 @@ void Model::runModel() {
     // It will start the model as a QProcess
     //QProcess model(this);
     model.setProcessChannelMode(QProcess::ForwardedChannels);
-    model.setWorkingDirectory(tmpDir);
+    model.setWorkingDirectory(tmpDir + "/build");
     model.setEnvironment(QProcess::systemEnvironment());
-    QString command = tmpDir;
+    QString command = tmpDir + "/build";
     command.append("/VirtualFPGAProject");
     std::cout << "Running project file at: " <<
                  command.toStdString() << std::endl;
