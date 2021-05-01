@@ -17,12 +17,14 @@ public:
 
     QString getSimDelay() { return simDelay; };
     QString getItPerCycle() { return itPerCycle; };
+    bool getEnableCmakeOut() { return enableCmakeOut; };
 
 private:
     Ui::SettingsDialog *ui;
 
     QString simDelay = "1";
     QString itPerCycle = "10";
+    bool enableCmakeOut = false;
 
 private slots:
     void updateValues();

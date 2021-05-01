@@ -65,7 +65,10 @@ void Model::compile(QStringList inputFileNames, QString simDelay, QString itPerC
     QStringList args;
     args << "-DSIM_DLY=" + simDelay << "-DIT=" + itPerCycle << "..";
     QProcess cmake;
-    cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
+    if (enableCmakeOut)
+        cmake.setProcessChannelMode(QProcess::ForwardedChannels);
+    else
+        cmake.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     cmake.setWorkingDirectory(tempDir.path() + "/build");
     cmake.start(command, args);
     //while(cmake.state() == QProcess::Running);
@@ -80,7 +83,10 @@ void Model::compile(QStringList inputFileNames, QString simDelay, QString itPerC
     args << "--build" << ".";
     QProcess make;
 
-    make.setProcessChannelMode(QProcess::ForwardedErrorChannel);
+    if (enableCmakeOut)
+        make.setProcessChannelMode(QProcess::ForwardedChannels);
+    else
+        make.setProcessChannelMode(QProcess::ForwardedErrorChannel);
     make.setWorkingDirectory(tempDir.path() + "/build");
     make.start(command, args);
     //while(make.state() == QProcess::Running);

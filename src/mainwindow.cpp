@@ -166,6 +166,7 @@ void MainWindow::openSettingsWindow() {
     if (diag.exec()) {
         simDelay = diag.getSimDelay();
         itPerCycle = diag.getItPerCycle();
+        enableCmakeOut = diag.getEnableCmakeOut();
     }
 }
 
@@ -195,6 +196,7 @@ void MainWindow::compileAndRunModel()
     model = new Model(tempDir.path());
     connect(model, &Model::parseDataReceived, this, &MainWindow::parseDataReceived);
     connect(this, &MainWindow::sendDataToSend, model, &Model::setDataToSend);
+    model->setEnableCmakeOut(enableCmakeOut);
     emit model->compile(inputFileNames, simDelay, itPerCycle);
     emit model->runModel();
 
@@ -226,9 +228,11 @@ void MainWindow::parseDataReceived(QString data) {
         led = led >> 1;
     }
     int num = decodeDigit(digit);
+    bool enablePoint = 0x80 & digit;
     for (int ii = 0; ii < numDigits; ++ii){
         if (!(anode & 0x01)) {
             ((QLCDNumber*)(digitsLayout->itemAt(ii)->widget()))->setSegmentStyle(QLCDNumber::Filled);
+            ((QLCDNumber*)(digitsLayout->itemAt(ii)->widget()))->display(num);
             ((QLCDNumber*)(digitsLayout->itemAt(ii)->widget()))->display(num);
         }
         else {

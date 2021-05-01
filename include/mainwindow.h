@@ -81,6 +81,7 @@ private:
     QString dataToSend = "0 0";
     QString simDelay = "1";
     QString itPerCycle = "10";
+    bool enableCmakeOut = false;
 
     void configureGroups();
     QString createDataToSend();

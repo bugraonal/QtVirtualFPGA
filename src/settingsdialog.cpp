@@ -17,4 +17,5 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::updateValues() {
     simDelay = ui->simDelaySpinBox->text();
     itPerCycle = ui->itPerCycleSpinBox->text();
+    enableCmakeOut = ui->cmakeOutCheckbox->isChecked();
 }

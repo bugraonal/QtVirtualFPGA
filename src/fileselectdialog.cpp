@@ -35,7 +35,7 @@ void FileSelectDialog::addTableItem(QString path) {
 
     QTableWidget *table = ui->modulesTable;
     int row = table->rowCount() - 1;
-    table->insertRow(1);
+    table->insertRow(row);
     auto nameItem = new QTableWidgetItem(path.section("/", -1, -1));
     table->setItem(row, 0, nameItem);
     auto pathItem = new QTableWidgetItem(path);

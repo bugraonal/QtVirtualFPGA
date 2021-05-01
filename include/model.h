@@ -17,8 +17,10 @@ class Model : public QObject
 public:
     Model(QString tmpDir);
     ~Model();
+    void setEnableCmakeOut(bool v) { enableCmakeOut = v; };
 
 private:
+    bool enableCmakeOut = false;
     bool modelRunning = 0;
     QString dataSent = "0 0";
     QUdpSocket *socket;

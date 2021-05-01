@@ -22,6 +22,7 @@ add_executable(VirtualFPGA
     src/model.cpp
     src/fileselectdialog.cpp
     src/settingsdialog.cpp
+    src/sevensegmentdisplay.cpp
 
     include/fileselectdialog.h
     include/indexedswitch.h
@@ -31,10 +32,12 @@ add_executable(VirtualFPGA
     include/settingsdialog.h
     include/versionmessage.h
     include/version.h
+    include/sevensegmentdisplay.h
 
     forms/fileselectdialog.ui
     forms/mainwindow.ui
     forms/settingsdialog.ui
+    forms/sevensegmentdisplay.ui
 
     resources/resources.qrc
 )
