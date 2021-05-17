@@ -27,6 +27,7 @@
 #include "fileselectdialog.h"
 #include "settingsdialog.h"
 #include "versionmessage.h"
+#include "graderdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -54,6 +55,12 @@ private slots:
 
     void openSettingsWindow();
 
+    void nextFile();
+
+    void previousFile();
+
+    void toggleGrader();
+
 signals:
     void sendDataToSend(QString data);
 
@@ -68,6 +75,8 @@ private:
     QBoxLayout *switchesLayout;
     QBoxLayout *ledsLayout;
     QBoxLayout *digitsLayout;
+
+    GraderDialog grader;
 
     Model *model;
     QTemporaryDir tempDir;

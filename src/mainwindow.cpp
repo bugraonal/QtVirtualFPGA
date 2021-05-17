@@ -31,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->StartButton, &QPushButton::clicked, this, &MainWindow::compileAndRunModel);
     connect(ui->StopButton, &QPushButton::clicked, this, &MainWindow::stopModel);
     connect(ui->actionVersion, &QAction::triggered, [](){(new VersionMessage())->exec();});
+    connect(ui->actionEnable_Grader, &QAction::triggered, this, &MainWindow::toggleGrader);
+    connect(ui->graderNextButton, &QPushButton::clicked, this, &MainWindow::nextFile);
+    connect(ui->graderPreviousButton, &QPushButton::clicked, this, &MainWindow::previousFile);
 }
 
 MainWindow::~MainWindow()
@@ -174,6 +177,12 @@ void MainWindow::on_applyConfigButton_clicked() { configureGroups(); }
 
 void MainWindow::openFile()
 {
+    if (ui->graderControlFrame->isEnabled()) {
+        if (!grader.exec()) {
+            std::cerr << "grader error" << std::endl;
+        }
+    }
+
     FileSelectDialog diag(tempDir.path());
     if (!diag.exec()) {
         std::cerr << "File select dialog error" << std::endl;
@@ -212,6 +221,49 @@ void MainWindow::stopModel()
     }
 }
 
+void MainWindow::nextFile() {
+
+    stopModel();
+    auto files = grader.nextFiles();
+    if (!files.isEmpty()) {
+        for (auto f : files) {
+            auto path = tempDir.filePath(f.section("/", -1, -1));
+            QFile oldFile(path);
+            oldFile.remove();
+            QFile file(f);
+            file.copy(path);
+        }
+        QString msg("Grading ");
+        msg.append(files[0].section("/", 0, -2));
+        ui->graderStatusLabel->setText(msg);
+    }
+}
+
+
+void MainWindow::previousFile() {
+
+    stopModel();
+    auto files = grader.previousFiles();
+    if (!files.isEmpty()) {
+        for (auto f : files) {
+            auto path = tempDir.filePath(f.section("/", -1, -1));
+            QFile oldFile(path);
+            oldFile.remove();
+            QFile file(f);
+            file.copy(path);
+        }
+        QString msg("Grading ");
+        msg.append(files[0].section("/", 0, -2));
+        ui->graderStatusLabel->setText(msg);
+    }
+
+}
+
+void MainWindow::toggleGrader()
+{
+    auto state = ui->graderControlFrame->isEnabled();
+    ui->graderControlFrame->setDisabled(state);
+}
 
 void MainWindow::parseDataReceived(QString data) {
     // Data that came from the model thread will be parsed and be displayed on
